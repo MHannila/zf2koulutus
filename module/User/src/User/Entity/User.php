@@ -21,8 +21,8 @@ use ZfcUser\Entity\UserInterface;
  *
  * @author Tom Oram <tom@scl.co.uk>
  */
-class User implements UserInterface, ProviderInterface
-{
+class User implements UserInterface, ProviderInterface {
+    
     /**
      * @var int
      * @ORM\Id
@@ -69,6 +69,11 @@ class User implements UserInterface, ProviderInterface
      * )
      */
     protected $roleList;
+
+    /**
+     * @OEM\OneToMany(targetEntity="Feature", mappedBy="product")
+     **/
+    private $borrowedList;
 
     /**
      * Initialies the roles variable.

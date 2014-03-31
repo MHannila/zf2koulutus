@@ -1,4 +1,4 @@
-USE `library` ;
+USE `mydb` ;
 
 INSERT INTO
 `user` (id, username, email, displayName, password, state)
