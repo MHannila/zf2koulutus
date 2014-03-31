@@ -14,11 +14,14 @@ include 'puphpet::params'
 Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
 group { 'puppet':   ensure => present }
 group { 'www-data': ensure => present }
+group { 'www-user': ensure => present }
 
 user { $::ssh_username:
-  shell  => '/bin/bash',
-  home   => "/home/${::ssh_username}",
-  ensure => present
+  shell   => '/bin/bash',
+  home    => "/home/${::ssh_username}",
+  ensure  => present,
+  groups  => ['www-data', 'www-user'],
+  require => [Group['www-data'], Group['www-user']]
 }
 
 user { ['apache', 'nginx', 'httpd', 'www-data']:
@@ -299,7 +302,22 @@ if hash_key_equals($apache_values, 'install', 1) {
     creates => $webroot_location,
   }
 
-  if ! defined(File[$webroot_location]) {
+  if (downcase($::provisioner_type) in ['virtualbox', 'vmware_fusion'])
+    and ! defined(File[$webroot_location])
+  {
+    file { $webroot_location:
+      ensure  => directory,
+      mode    => 0775,
+      require => [
+        Exec["exec mkdir -p ${webroot_location}"],
+        Group['www-data']
+      ]
+    }
+  }
+
+  if !(downcase($::provisioner_type) in ['virtualbox', 'vmware_fusion'])
+    and ! defined(File[$webroot_location])
+  {
     file { $webroot_location:
       ensure  => directory,
       group   => 'www-data',
@@ -340,7 +358,7 @@ if hash_key_equals($apache_values, 'install', 1) {
   $apache_settings = merge($apache_values['settings'], {
     'mpm_module'     => $mpm_module,
     'conf_template'  => $apache_conf_template,
-    'sendfile'       => $apache_values['settings']['sendfile'] ? { 0 => 'Off', 1 => 'On', default => 'Off' },
+    'sendfile'       => $apache_values['settings']['sendfile'] ? { 1 => 'On', default => 'Off' },
     'apache_version' => $apache_version
   })
 
@@ -349,6 +367,13 @@ if hash_key_equals($apache_values, 'install', 1) {
   if $::osfamily == 'redhat' and ! defined(Iptables::Allow['tcp/80']) {
     iptables::allow { 'tcp/80':
       port     => '80',
+      protocol => 'tcp'
+    }
+  }
+
+  if $::osfamily == 'redhat' and ! defined(Iptables::Allow['tcp/443']) {
+    iptables::allow { 'tcp/443':
+      port     => '443',
       protocol => 'tcp'
     }
   }
@@ -370,16 +395,41 @@ if hash_key_equals($apache_values, 'install', 1) {
         creates => $vhost['docroot'],
       }
 
-      if ! defined(File[$vhost['docroot']]) {
+      if (downcase($::provisioner_type) in ['virtualbox', 'vmware_fusion'])
+        and ! defined(File[$vhost['docroot']])
+      {
         file { $vhost['docroot']:
           ensure  => directory,
+          mode    => 0765,
           require => Exec["exec mkdir -p ${vhost['docroot']} @ key ${key}"]
         }
       }
+
+      if !(downcase($::provisioner_type) in ['virtualbox', 'vmware_fusion'])
+        and ! defined(File[$vhost['docroot']])
+      {
+        file { $vhost['docroot']:
+          ensure  => directory,
+          group   => 'www-user',
+          mode    => 0765,
+          require => [
+            Exec["exec mkdir -p ${vhost['docroot']} @ key ${key}"],
+            Group['www-user']
+          ]
+        }
+      }
+
+      create_resources(apache::vhost, { "${key}" => merge($vhost, {
+          'custom_fragment' => template('puphpet/apache/custom_fragment.erb'),
+          'ssl'             => 'ssl' in $vhost and str2bool($vhost['ssl']) ? { true => true, default => false },
+          'ssl_cert'        => $vhost['ssl_cert'] ? { undef => undef, '' => undef, default => $vhost['ssl_cert'] },
+          'ssl_key'         => $vhost['ssl_key'] ? { undef => undef, '' => undef, default => $vhost['ssl_key'] },
+          'ssl_chain'       => $vhost['ssl_chain'] ? { undef => undef, '' => undef, default => $vhost['ssl_chain'] },
+          'ssl_certs_dir'   => $vhost['ssl_certs_dir'] ? { undef => undef, '' => undef, default => $vhost['ssl_certs_dir'] }
+        })
+      })
     }
   }
-
-  create_resources(apache::vhost, $apache_values['vhosts'])
 
   if count($apache_values['modules']) > 0 {
     apache_mod { $apache_values['modules']: }
@@ -418,7 +468,22 @@ if hash_key_equals($nginx_values, 'install', 1) {
     onlyif  => "test -d ${webroot_location}",
   }
 
-  if ! defined(File[$webroot_location]) {
+  if (downcase($::provisioner_type) in ['virtualbox', 'vmware_fusion'])
+    and ! defined(File[$webroot_location])
+  {
+    file { $webroot_location:
+      ensure  => directory,
+      mode    => 0775,
+      require => [
+        Exec["exec mkdir -p ${webroot_location}"],
+        Group['www-data']
+      ]
+    }
+  }
+
+  if !(downcase($::provisioner_type) in ['virtualbox', 'vmware_fusion'])
+    and ! defined(File[$webroot_location])
+  {
     file { $webroot_location:
       ensure  => directory,
       group   => 'www-data',

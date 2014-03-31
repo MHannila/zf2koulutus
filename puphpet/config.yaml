@@ -7,8 +7,8 @@ vagrantfile-local:
         network:
             private_network: 192.168.56.101
             forwarded_port:
-                BTvDbIAv592K:
-                    host: '6034'
+                FB9deygxrxfK:
+                    host: '6350'
                     guest: '22'
         provider:
             virtualbox:
@@ -26,8 +26,7 @@ vagrantfile-local:
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
                     - '--parser future'
         synced_folder:
-            6NehTPa8Or55:
-                id: vagrant-root
+            4bxMeq4wQvy7:
                 source: ./
                 target: /var/www/zf2koulutus
                 nfs: 'false'
@@ -46,7 +45,7 @@ vagrantfile-local:
         host: detect
 server:
     packages:
-        - vim
+        - vim-common
     dot_files:
         -
             bash_aliases: null
@@ -73,24 +72,30 @@ apache:
         - php
         - rewrite
     vhosts:
-        1rodyJmlbsDw:
-            servername: zf2koulutus.dev
+        7P52kiRYl57y:
+            servername: awesome.dev
             serveraliases:
-                - www.zf2koulutus.dev
-            docroot: /var/www/zf2koulutus/public
+                - www.awesome.dev
+            docroot: /var/www/awesome
             port: '80'
             setenv:
                 - 'APP_ENV dev'
             override:
                 - All
             custom_fragment: ''
+            ssl_cert: ''
+            ssl_key: ''
+            ssl_chain: ''
+            ssl_certs_dir: ''
     mod_pagespeed: 0
     mod_spdy: 0
 nginx:
     install: '1'
     vhosts:
-        2Q6sz5FmNTSD:
+        XZn8fGjYbg9p:
             server_name: zf2koulutus.dev
+            server_aliases:
+                - www.zf2koulutus.dev
             www_root: /var/www/zf2koulutus/public
             listen_port: '80'
             index_files:
@@ -108,6 +113,9 @@ php:
             - cli
             - intl
             - mcrypt
+            - fpm
+            - cgi
+            - common
         pear: {  }
         pecl:
             - pecl_http
@@ -130,18 +138,18 @@ drush:
     settings:
         drush.tag_branch: 6.x
 mysql:
-    install: '1'
-    root_password: root
-    phpmyadmin: '1'
+    install: 0
+    root_password: pass
+    phpmyadmin: 0
     adminer: 0
     databases:
-        M0246ps94wt1:
+        8fyYUkxsRP0Y:
             grant:
                 - ALL
             name: zf2koulutus
             host: localhost
-            user: db-user
-            password: ass
+            user: dbuser
+            password: pass
             sql_file: ''
 postgresql:
     install: 0
@@ -153,9 +161,9 @@ postgresql:
     databases: {  }
     adminer: 0
 mariadb:
-    install: 0
-    root_password: root
-    phpmyadmin: '1'
+    install: '1'
+    root_password: '123'
+    phpmyadmin: 0
     adminer: 0
     databases: {  }
     version: '10.0'
