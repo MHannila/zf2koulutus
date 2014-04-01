@@ -27,10 +27,15 @@ return array(
                     ),
                     'defaults' => array(
                         'controller'    => 'Library\Controller\Book',
-                        'action' => 'list',
+                        'action' => 'index',
                     )
                 ),
             ),
+        ),
+    ),
+    'view_manager' => array(
+        'template_path_stack' => array(
+            __DIR__ . '/../view',
         ),
     ),
     'doctrine' => array(
