@@ -69,7 +69,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`book` (
   `title` VARCHAR(45) NOT NULL ,
   `isbn` VARCHAR(45) NULL ,
   `author` VARCHAR(45) NULL ,
-  `user_id` INT NOT NULL ,
+  `user_id` INT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `isbn_UNIQUE` (`isbn` ASC) ,
   INDEX `fk_book_user1` (`user_id` ASC) ,
