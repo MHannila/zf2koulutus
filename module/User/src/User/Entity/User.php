@@ -45,8 +45,8 @@ class User implements UserInterface, ProviderInterface {
     protected $state;
 
     /**
-     * @ORM\ManyToMany(targetEntity="MyNamespace\Role")
-     * @ORM\JoinTable(name="user_role_linker",
+     * @ORM\ManyToMany(targetEntity="User\Entity\Role")
+     * @ORM\JoinTable(name="user_link_role",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
      * )
@@ -54,7 +54,7 @@ class User implements UserInterface, ProviderInterface {
     protected $roleList;
 
     /**
-     * @ORM\OneToMany(targetEntity="Feature", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="Library\Entity\Book", mappedBy="borrower")
      **/
     private $borrowedList;
 
@@ -65,6 +65,10 @@ class User implements UserInterface, ProviderInterface {
 
     public function getId() {
         return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
     }
 
     public function getUsername() {
@@ -109,6 +113,10 @@ class User implements UserInterface, ProviderInterface {
 
     public function getRoleList() {
         return $this->roleList->getValues();
+    }
+
+    public function getRoles() {
+        return $this->getRoleList();
     }
 
     public function addRole(Role $role) {

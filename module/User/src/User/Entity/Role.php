@@ -28,11 +28,13 @@ class Role implements HierarchicalRoleInterface {
     protected $isDefault;
 
     /**
-     * @var Role
-     * @ORM\ManyToOne(targetEntity="User\Entity\Role")
+     * @ORM\ManyToOne(targetEntity="Role")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $parent;
+
+    public function __construct() {
+    }
 
     public function getId() {
         return $this->id;
