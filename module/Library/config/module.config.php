@@ -12,10 +12,25 @@ namespace Library;
 return array(
     'controllers' => array(
         'invokables' => array(
+            'Library\Controller\Book' => 'Library\Controller\BookController',
         ),
     ),
     'router' => array(
         'routes' => array(
+        	'book' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/book/[:action[/:id]]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9]*', 
+                        'subdomain' => '[0-9]+', 
+                    ),
+                    'defaults' => array(
+                        'controller'    => 'Library\Controller\Book',
+                        'action' => 'list',
+                    )
+                ),
+            ),
         ),
     ),
 );

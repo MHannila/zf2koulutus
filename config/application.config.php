@@ -10,6 +10,7 @@ return array(
         // 'ZfcUserDoctrineORM',
         // 'BjyAuthorize',
         'Application',
+        'Library',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

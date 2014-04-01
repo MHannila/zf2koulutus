@@ -38,7 +38,9 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                        <li><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                        <li><a href="<?php echo $this->url('book', array('action' => 'add')) ?>"><?php echo $this->translate('Add a book') ?></a></li>
+                        <li><a href="<?php echo $this->url('book', array('action' => 'list')) ?>"><?php echo $this->translate('Book list') ?></a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
