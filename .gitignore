@@ -13,4 +13,4 @@ phpmyadmin
 html
 *.sublime-project
 *.sublime-workspace
-puphpet/files/dot/ssh/*
+puphpet/files/dot/ssh/id_rsa*
