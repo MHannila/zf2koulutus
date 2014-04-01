@@ -41,7 +41,11 @@
                         <li><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
                         <li><a href="<?php echo $this->url('book', array('action' => 'add')) ?>"><?php echo $this->translate('Add a book') ?></a></li>
                         <li><a href="<?php echo $this->url('book', array('action' => 'list')) ?>"><?php echo $this->translate('Book list') ?></a></li>
-                        <li><a href="<?php echo $this->url('zfcuser', array('action' => 'login')) ?>"><?php echo $this->translate('Login') ?></a></li>
+                        <?php if ($this->isAllowed('book', 'borrow')) : ?>
+                            <li><a href="<?php echo $this->url('book', array('action' => 'borrowed')) ?>"><?php echo $this->translate('Borrowed list') ?></a></li>
+                        <?php endif; ?>
+                        <li><a href="<?php echo $this->url('zfcuser/login') ?>"><?php echo $this->translate('Login') ?></a></li>
+                        <li><a href="<?php echo $this->url('zfcuser/logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ZfcUser\Entity\UserInterface;
 
+use Library\Entity\Book;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")

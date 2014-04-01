@@ -35,7 +35,7 @@ class Book {
 
     /**
      * @ORM\ManyToOne(targetEntity="User\Entity\User", inversedBy="borrowedList")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      **/   
     protected $borrower;
 
