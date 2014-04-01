@@ -24,6 +24,7 @@ class Book {
     protected $title;
 
      /**
+     * @ORM\Column(type="string", length=45, nullable=true)
      */
     protected $isbn;
 
