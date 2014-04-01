@@ -33,4 +33,18 @@ return array(
             ),
         ),
     ),
+    'doctrine' => array(
+        'driver' => array(
+            // overriding zfc-user-doctrine-orm's config
+            'library_entity' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'paths' => __DIR__ . '/../src/'.__NAMESPACE__.'/Entity',
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    __NAMESPACE__.'\Entity' => 'library_entity',
+                ),
+            ),
+        ),
+    ),
 );
