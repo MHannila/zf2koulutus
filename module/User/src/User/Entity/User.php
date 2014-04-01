@@ -126,4 +126,16 @@ class User implements UserInterface, ProviderInterface {
     public function removeRole(Role $role) {
         $this->roleList->removeElement($role);
     }
+
+    public function getBorrowedList() {
+        return $this->borrowedList->getValues();
+    }
+
+    public function addBorrowed(Book $book) {
+        $this->borrowedList->add($book);
+    }
+
+    public function removeBorrowed(Book $book) {
+        $this->borrowedList->removeElement($book);
+    }
 }
