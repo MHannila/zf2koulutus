@@ -1,0 +1,16 @@
+<?php
+
+$form->setAttribute('action', $this->url('book', array('action' => 'add')));
+$form->prepare();
+
+$fieldset = $form->get('book');
+
+echo $this->form()->openTag($form);
+echo $this->formRow($fieldset->get('title'));
+?><br/><?php
+echo $this->formRow($fieldset->get('isbn'));
+?><br/><?php
+echo $this->formRow($fieldset->get('author'));
+?><br/><?php
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();

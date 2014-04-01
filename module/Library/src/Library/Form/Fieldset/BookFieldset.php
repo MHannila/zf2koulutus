@@ -37,7 +37,7 @@ class BookFieldset extends Fieldset implements InputFilterProviderInterface {
 		 		'label' => _('ISBN'),
 		 	),
 		 	'attributes' => array(
-		 	)
+		 	),
 		));
 
 		$this->add(array(
@@ -52,13 +52,20 @@ class BookFieldset extends Fieldset implements InputFilterProviderInterface {
 
 	}
 
-    public function getInputFilterSpecification()
-    {
+    public function getInputFilterSpecification() {
         return array(
             'title' => array(
-                'required' => false,
+                'required' => true,
             ),
             'isbn' => array(
+                'required' => false,
+                'validators' => array(
+	                array(
+	                    'name' => 'isbn',
+	                ),
+	            ),
+            ),
+            'author' => array(
                 'required' => false,
             ),
         );

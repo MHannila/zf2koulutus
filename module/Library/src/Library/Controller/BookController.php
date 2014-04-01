@@ -21,13 +21,11 @@ class BookController extends BaseController {
             $form->setData($this->request->getPost());
 
             if ($form->isValid()) {
-
-                // $em->persist($book);
-
-                // $em->flush();
-                // return $this->redirect()->toRoute('core/user', array(
-                //     'action' => 'applications',
-                // ));
+                $em->persist($book);
+                $em->flush();
+                return $this->redirect()->toRoute('book', array(
+                    'action' => 'list',
+                ));
             }
         }
 
@@ -41,7 +39,19 @@ class BookController extends BaseController {
 
         $books = $em->getRepository('Library\Entity\Book')->findAll();
 
-        return array();
+        $view = new ViewModel();
+
+        foreach ($books as $book) {
+            $childView = new ViewModel();
+            $childView->setAttributes(array(
+                'book' => $book,
+            ));
+            $childView->setTemplate('library/book/list-row');
+            $view->addChild($childView, 'books', true);
+        }
+        $view->setTemplate('library/book/list');
+
+        return $view;
     }
 
     
