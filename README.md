@@ -22,7 +22,7 @@
 6. `cd /var/www/zf2koulutus`
 7. `php composer.phar self-update`
 8. `php composer.phar update`
-9. Avaa [192.168.56.101](192.168.56.101)
+9. Avaa [192.168.56.101](http://192.168.56.101)
 10. Jos et tarvitse ympäristöä
     1. Poistu virtuaalikoneesta `exit`
     2. Sammuta virtualikone `vagrant halt`
@@ -33,7 +33,7 @@ Mahdollistaa selaimella esim. zf2koulutus.dev/ urlin kutsumisen ip:n sijasta.
 ###UNIX
 1. `sudo nano /etc/hosts`
 2. Lisää tiedostoon rivi `192.168.56.101 zf2koulutus.dev`
-3. Avaa [zf2koulutus.dev/](zf2koulutus.dev/)
+3. Avaa [zf2koulutus.dev/](http://zf2koulutus.dev/)
 
 ###Windows
 1. Avaa Notepad admin oikeuksilla
