@@ -74,6 +74,22 @@ return array(
                     'controller' => 'zfcuser', 
                     'roles' => array('guest', 'user', 'admin')
                 ),
+                array(
+                    'controller' => 'Library\Controller\Book',
+                    'action' => array('add', 'edit'),
+                    'roles' => array('admin'),
+                ),
+                array(
+                    'controller' => 'Library\Controller\Book',
+                    'action' => array('borrow', 'borrowed', 'return'),
+                    'roles' => array('VIP user'),
+                ),
+                array(
+                    'controller' => 'Library\Controller\Book',
+                    'action' => array('list'),
+                    'roles' => array('user', 'admin'),
+                ),
+
             ),
         ),
     ),
