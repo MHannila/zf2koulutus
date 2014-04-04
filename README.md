@@ -42,3 +42,8 @@ Mahdollistaa selaimella esim. zf2koulutus.dev/ urlin kutsumisen ip:n sijasta.
     * Jos tiedostoa ei näy, tarkista että näkymässä on kaikki tiedostot, ei vain esim. .txt
 3. Lisää tiedostoon rivi `192.168.56.101 zf2koulutus.dev`
 4. Avaa [zf2koulutus.dev/](zf2koulutus.dev/)
+
+## Yleistä
+
+* master-branch sisältää lähtötilanteen ja completed-branch sisältää koulutuksen lopputuloksen
+* valmiiden käyttäjien salasanat ovat 'passpass' (email: admin@library.fi, mh@zf2koulutus.fi)
