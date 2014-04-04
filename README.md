@@ -27,6 +27,7 @@
     1. Poistu virtuaalikoneesta `exit`
     2. Sammuta virtualikone `vagrant halt`
         * Saat virtuaalikoneen taas päälle ajamalla `vagrant up` (paljon nopeammin kuin ensimmäisellä kerralla)
+        * Jos haluat tuhota virtuaalikoneen kokonaan `vagrant destroy`
 
 ## Hosts tiedoston editointi (vapaaehtoinen)
 Mahdollistaa selaimella esim. zf2koulutus.dev/ urlin kutsumisen ip:n sijasta.
