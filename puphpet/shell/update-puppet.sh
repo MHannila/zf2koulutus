@@ -19,7 +19,9 @@ if [[ ! -f /.puphpet-stuff/update-puppet ]]; then
         echo "Finished running update-puppet apt-get update"
 
         echo "Updating Puppet to latest version"
-        apt-get -y install puppet >/dev/null
+        #apt-get -y install puppet >/dev/null
+        apt-get -y install puppet-common=3.4.3-1puppetlabs1 >/dev/null
+        apt-get -y install puppet=3.4.3-1puppetlabs1 >/dev/null
         PUPPET_VERSION=$(puppet help | grep 'Puppet v')
         echo "Finished updating puppet to latest version: ${PUPPET_VERSION}"
 
