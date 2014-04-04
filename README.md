@@ -37,7 +37,7 @@ Mahdollistaa selaimella esim. zf2koulutus.dev/ urlin kutsumisen ip:n sijasta.
 
 ###Windows
 1. Avaa Notepad admin oikeuksilla
-2. Avaa tiedosto `\system32\drivers\etc\hosts`
+2. Avaa tiedosto `c:\windows\system32\drivers\etc\hosts`
     * Jos tiedostoa ei näy, tarkista että näkymässä on kaikki tiedostot, ei vain esim. .txt
 3. Lisää tiedostoon rivi `192.168.56.101 zf2koulutus.dev`
 4. Avaa [zf2koulutus.dev/](zf2koulutus.dev/)
